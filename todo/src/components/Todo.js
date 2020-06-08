@@ -13,7 +13,6 @@ const Todo = (props) => {
         )
     }
 
-
     return (
         <div className={props.items.completed ? "completed" : ""}>
             <p onClick={ToggleTodo}>{props.items.item} {props.items.completed ? 'DONE' : 'TODO'}</p>

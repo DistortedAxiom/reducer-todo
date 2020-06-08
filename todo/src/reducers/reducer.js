@@ -19,23 +19,24 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 list: [...state.list,
-                    {
-                        item: action.payload,
-                        completed: false,
-                        id: Date.now(),
-                    }
+                       action.payload
                 ]
             };
         case "COMPLETE_TODO":
-              return {
+            return {
                 ...state,
                 list: state.list.map(todo => {
                     if (todo.id === action.payload) {
-                      return { ...todo, completed: !todo.completed };
+                        return { ...todo, completed: !todo.completed };
                     } else {
-                      return todo;
+                        return todo;
                     }
-                  })
+                })
+            };
+        case "CLEAR_TODO":
+            return {
+                ...state,
+                list: state.list.filter(item => !item.completed)
               };
         default:
             return state;

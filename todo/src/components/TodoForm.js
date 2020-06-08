@@ -14,22 +14,39 @@ const TodoForm = ({dispatch}) => {
             dispatch(
                 {
                     type: "ADD_TODO",
-                    payload: newTodo
+                    payload: {
+                        item: newTodo,
+                        id: Date.now(),
+                        completed: false
+                    }
                 }
             )
         }
         setNewTodo("")
+        document.getElementById("newTodo").reset()
+    }
+
+    const handleClear = (event) => {
+        event.preventDefault();
+        dispatch(
+            {
+                type: "CLEAR_TODO",
+            }
+        )
     }
 
     return (
-      <div>
-        <input
-          className=""
-          type="text"
-          name="newTodo"
-          onChange={handleChange}
-        />
+      <div className="form-container">
+          <form id="newTodo">
+            <input
+            className=""
+            type="text"
+            name="newTodo"
+            onChange={handleChange}
+            />
         <button onClick={handleSubmit}>Add Todo</button>
+        <button onClick={handleClear}>Clear Finished Todos</button>
+        </form>
       </div>
     );
   };
