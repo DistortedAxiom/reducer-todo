@@ -10,7 +10,7 @@ const TodoForm = ({dispatch}) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (newTodo != "") {
+        if (newTodo !== "") {
             dispatch(
                 {
                     type: "ADD_TODO",
@@ -18,9 +18,8 @@ const TodoForm = ({dispatch}) => {
                 }
             )
         }
-        setNewTodo('');
+        setNewTodo("")
     }
-
 
     return (
       <div>

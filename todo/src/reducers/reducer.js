@@ -1,5 +1,3 @@
-import React from 'react';
-
 export let initialState = {
     list: [
         {
@@ -18,16 +16,27 @@ export let initialState = {
 export const reducer = (state, action) => {
     switch(action.type) {
         case "ADD_TODO":
-            const newTodo = {
-                item: action.payload,
-                completed: false,
-                id: Date.now(),
-            };
             return {
                 ...state,
-                list: [...state.list, newTodo]
+                list: [...state.list,
+                    {
+                        item: action.payload,
+                        completed: false,
+                        id: Date.now(),
+                    }
+                ]
             };
-
+        case "COMPLETE_TODO":
+              return {
+                ...state,
+                list: state.list.map(todo => {
+                    if (todo.id === action.payload) {
+                      return { ...todo, completed: !todo.completed };
+                    } else {
+                      return todo;
+                    }
+                  })
+              };
         default:
             return state;
     }
